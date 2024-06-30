@@ -14,7 +14,7 @@ const Splash = () => {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-blue-500">
-      <h1 className="text-5xl text-white">Welcome to Cab Service</h1>
+      <h1 className="text-5xl text-white">CABs 24</h1>
     </div>
   );
 };
