@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,8 @@ const Login = () => {
 };
 
 const DriverLogin = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl mb-8">Driver Login</h1>
@@ -42,6 +44,7 @@ const DriverLogin = () => {
           <Input id="password" type="password" placeholder="Enter your password" />
         </div>
         <Button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded">Login</Button>
+        <Button onClick={() => navigate('/login')} className="w-full bg-gray-500 text-white py-2 px-4 rounded">Back</Button>
       </form>
     </div>
   );
