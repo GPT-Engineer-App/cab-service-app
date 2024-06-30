@@ -16,6 +16,9 @@ const Login = () => {
         <Link to="/customer-login" className="block text-center bg-green-500 text-white py-2 px-4 rounded">
           Customer Login
         </Link>
+        <Link to="/signup" className="block text-center bg-yellow-500 text-white py-2 px-4 rounded">
+          Sign Up
+        </Link>
       </div>
     </div>
   );
@@ -23,7 +26,7 @@ const Login = () => {
 
 const DriverLogin = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "" });
+  const [formData, setFormData] = useState({ emailOrPhone: "", password: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -32,8 +35,8 @@ const DriverLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, phone, password } = formData;
-    if (!name || !email || !phone || !password) {
+    const { emailOrPhone, password } = formData;
+    if (!emailOrPhone || !password) {
       setError("All fields are required.");
       return;
     }
@@ -52,16 +55,8 @@ const DriverLogin = () => {
           </Alert>
         )}
         <div>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" type="text" placeholder="Enter your name" value={formData.name} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="email">Email ID</Label>
-          <Input id="email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="phone">Phone Number</Label>
-          <Input id="phone" type="tel" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
+          <Label htmlFor="emailOrPhone">Email ID or Phone Number</Label>
+          <Input id="emailOrPhone" type="text" placeholder="Enter your email or phone number" value={formData.emailOrPhone} onChange={handleChange} />
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
@@ -75,6 +70,51 @@ const DriverLogin = () => {
 };
 
 const CustomerLogin = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ emailOrPhone: "", password: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { emailOrPhone, password } = formData;
+    if (!emailOrPhone || !password) {
+      setError("All fields are required.");
+      return;
+    }
+    setError("");
+    // Proceed with login logic
+  };
+
+  return (
+    <div className="h-screen w-screen flex flex-col items-center justify-center bg-gray-100">
+      <h1 className="text-3xl mb-8">Customer Login</h1>
+      <form className="space-y-4 w-1/3" onSubmit={handleSubmit}>
+        {error && (
+          <Alert>
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+        <div>
+          <Label htmlFor="emailOrPhone">Email ID or Phone Number</Label>
+          <Input id="emailOrPhone" type="text" placeholder="Enter your email or phone number" value={formData.emailOrPhone} onChange={handleChange} />
+        </div>
+        <div>
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" type="password" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
+        </div>
+        <Button type="submit" className="w-full bg-green-500 text-white py-2 px-4 rounded">Login</Button>
+        <Button onClick={() => navigate('/login')} className="w-full bg-gray-500 text-white py-2 px-4 rounded">Back</Button>
+      </form>
+    </div>
+  );
+};
+
+const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "" });
   const [error, setError] = useState("");
@@ -91,12 +131,12 @@ const CustomerLogin = () => {
       return;
     }
     setError("");
-    // Proceed with login logic
+    // Proceed with sign-up logic
   };
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-3xl mb-8">Customer Login</h1>
+      <h1 className="text-3xl mb-8">Sign Up</h1>
       <form className="space-y-4 w-1/3" onSubmit={handleSubmit}>
         {error && (
           <Alert>
@@ -120,7 +160,7 @@ const CustomerLogin = () => {
           <Label htmlFor="password">Password</Label>
           <Input id="password" type="password" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
         </div>
-        <Button type="submit" className="w-full bg-green-500 text-white py-2 px-4 rounded">Login</Button>
+        <Button type="submit" className="w-full bg-yellow-500 text-white py-2 px-4 rounded">Sign Up</Button>
         <Button onClick={() => navigate('/login')} className="w-full bg-gray-500 text-white py-2 px-4 rounded">Back</Button>
       </form>
     </div>
@@ -128,4 +168,4 @@ const CustomerLogin = () => {
 };
 
 export default Login;
-export { DriverLogin, CustomerLogin };
+export { DriverLogin, CustomerLogin, SignUp };
