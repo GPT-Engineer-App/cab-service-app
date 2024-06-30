@@ -47,4 +47,5 @@ const DriverLogin = () => {
   );
 };
 
-export { Login, DriverLogin };
+export default Login;
+export { DriverLogin };
